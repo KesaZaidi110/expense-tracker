@@ -1,0 +1,88 @@
+body {
+    font-family: arial;
+    margin: 0;
+}
+
+h1,h2 {
+    text-align: center;
+
+}
+.input-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+.input-section label {
+    font-weight: bold;
+    margin: 10px;
+
+}
+.input-section input[type="number"], .input-section input[type="date"] {
+    padding: 5px;
+    margin: 10px;
+}
+.input-section button {
+    padding: 5px, 10px; 
+    background-color: rgb(238, 9, 9);
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+.expenses-list {
+    margin: 20px;
+
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+
+}
+th, td{
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: rgba(171, 70, 131, 0.455) ;
+    color: black;
+}
+tfoot td {
+    font-weight: bold;
+}
+.delete-btn {
+    padding: 5px, 10px; 
+    background-color: rgb(36, 4, 36);
+    color: white;
+    border: none;
+    border-radius: 4px;   
+}
+.container{
+    width: 100%;
+    min-height: 100vh; 
+    background: rgb(2,0,36);
+    background: rgb(238,174,202);
+background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+    padding: 10px;
+
+}
+#category-select{
+    height: 25px;
+    border-radius: 7px;
+    width: 100px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: darkolivegreen;
+    text-align: center;
+}
+#Amount-input{
+    height: 20px;
+    background-color: darkolivegreen;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 10px;
+    border: none;
+}
+#Date-input{
+    border-radius:7px ;
+    background-color: darkolivegreen;
+}

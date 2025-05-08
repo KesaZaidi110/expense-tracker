@@ -1,59 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense tracker web App </title>
-    <link rel="stylesheet" href="style3.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stayzio Expense Tracker</title>
+  <link rel="stylesheet" href="style3.css" />
 </head>
 <body>
-    <div class="container">
-    <h1>Expense Tracker Web App</h1>
+
+  <!-- ✅ Navbar Start -->
+  <nav class="navbar">
+    <div class="nav-logo">💸Expense Tracker</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#list">Lists</a></li>
+      <li><a href="#calculator">Calculator</a></li>
+      <li><a href="#total">Total Tracker</a></li>
+    </ul>
+  </nav>
+  <!-- ✅ Navbar End -->
+
+  <!-- ✅ Main Content -->
+  <div class="container" id="home">
+    <h1>💸 Stayzio Expense Tracker</h1>
+
     <div class="input-section">
-        <label for = "category-select">Category:</label>
-        <select id="category-select">
-            <option value="College Fee">College Fees</option>
-            <option value="Rent">Rent</option>
-            <option value="Transport">Transport</option>
-            <option value="Food">Food</option>
-            <option value="Shopping">shopping</option>
-            <option value=" cold Drinks"> Cold Drinks</option>
-            <option value="Traveling">Traveling</option>
-        </select>
-        <label for="Amount-input"> Amount:</label>
-        <input type="number" id="Amount-input">
-        <label for="Date-input"> Date:</label>
-        <input type="date"  id="Date-input">
-        <button id="add-btn"> Add</button>
+      <select id="category-select">
+        <option value="">-- Select Category --</option>
+        <option value="College Fee">🎓 College Fees</option>
+        <option value="Rent">🏠 Rent</option>
+        <option value="Transport">🚗 Transport</option>
+        <option value="Food">🍽️ Food</option>
+        <option value="Shopping">🛍️ Shopping</option>
+        <option value="Cold Drinks">🥤 Cold Drinks</option>
+        <option value="Traveling">✈️ Traveling</option>
+      </select>
+      <input type="number" id="amount-input" placeholder="Amount ₹" />
+      <input type="date" id="date-input" />
+      <button id="add-btn">Add</button>
+      <button id="reset-btn">Reset All</button>
     </div>
-    <div class="expenses-list">
-        <h2>Expenses-list</h2>
-        <table>
 
-            <thead>
-                
-                    <tr>
-                        <th>Category</th>
-                        <th>Amount</th>
-                        <th>Date</th>
-                        <th>Delete</th>
-                    </tr>
-                
-            </thead>
-            <tbody id="expense-table-body">
-
-
-            </tbody>
-            <tfoot>
-                <td>Total:</td>
-                <td id="Total-amount"></td>
-                <td></td>
-                <td></td>
-                
-            </tfoot>
-        </table>
+    <div class="search-filter">
+      <input type="text" id="search-input" placeholder="Search by category or date..." />
+      <select id="filter-category">
+        <option value="">Filter Category</option>
+        <option value="College Fee">College Fees</option>
+        <option value="Rent">Rent</option>
+        <option value="Transport">Transport</option>
+        <option value="Food">Food</option>
+        <option value="Shopping">Shopping</option>
+        <option value="Cold Drinks">Cold Drinks</option>
+        <option value="Traveling">Traveling</option>
+      </select>
     </div>
-</div>
-    <script  src="script3.js"></script>
+
+    <div class="expenses-list" id="list">
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody id="expense-table-body"></tbody>
+        <tfoot>
+          <tr>
+            <td><strong>Total:</strong></td>
+            <td id="total-amount">0</td>
+            <td colspan="2"></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+
+  <!-- ✅ Calculator Section -->
+  <div id="calculator" class="calculator-section">
+    <h2>🧮 Simple Calculator</h2>
+    <input type="number" id="calc-num1" placeholder="Enter first number">
+    <input type="number" id="calc-num2" placeholder="Enter second number">
+    <button onclick="calculateSum()">Calculate</button>
+    <p id="calc-result"></p>
+  </div>
+
+  <!-- ✅ Total Tracker Section -->
+  <div id="total" class="total-section">
+    <h2>📊 Total Amount Tracker</h2>
+    <p>Your total tracked expenses: <strong id="total-tracker-display">₹ 0</strong></p>
+  </div>
+
+  <script src="script3.js"></script>
 </body>
 </html>

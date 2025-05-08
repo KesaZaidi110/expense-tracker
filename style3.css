@@ -1,88 +1,187 @@
-body {
-    font-family: arial;
+{
+    box-sizing: border-box;
     margin: 0;
-}
-
-h1,h2 {
-    text-align: center;
-
-}
-.input-section {
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  body {
+    background: #111827; /* Dark background */
+    color: #f3f4f6;       /* Light text */
+    min-height: 100vh;
+  }
+  
+  /* Navbar */
+  .navbar {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-}
-.input-section label {
-    font-weight: bold;
-    margin: 10px;
-
-}
-.input-section input[type="number"], .input-section input[type="date"] {
-    padding: 5px;
-    margin: 10px;
-}
-.input-section button {
-    padding: 5px, 10px; 
-    background-color: rgb(238, 9, 9);
+    background-color: #1f2937;
+    padding: 15px 30px;
     color: white;
-    border: none;
-    border-radius: 4px;
-}
-.expenses-list {
-    margin: 20px;
-
-}
-table {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .nav-logo {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  .nav-links li a {
+    text-decoration: none;
+    color: #f3f4f6;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background 0.3s;
+  }
+  .nav-links li a:hover {
+    background-color: #374151;
+  }
+  
+  /* Container */
+  .container {
+    padding: 30px;
+  }
+  
+  /* Heading */
+  h1, h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #e5e7eb;
+  }
+  
+  /* Input Section */
+  .input-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .input-section select,
+  .input-section input[type="number"],
+  .input-section input[type="date"],
+  .input-section button {
+    padding: 10px;
+    border: 1px solid #374151;
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: #1f2937;
+    color: #f3f4f6;
+    transition: all 0.3s ease;
+  }
+  .input-section button {
+    background-color: #2563eb;
+    color: white;
+    cursor: pointer;
+  }
+  .input-section button:hover {
+    background-color: #1d4ed8;
+  }
+  
+  /* Search/Filter */
+  .search-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .search-filter input,
+  .search-filter select {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #374151;
+    background-color: #1f2937;
+    color: #f3f4f6;
+    font-size: 1rem;
+    width: 200px;
+  }
+  
+  /* Table */
+  table {
     width: 100%;
     border-collapse: collapse;
-
-}
-th, td{
-    border: 1px solid #ddd;
-    padding: 8px;
+    background-color: #1f2937;
+    color: #f3f4f6;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th, td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #374151;
     text-align: left;
-}
-th {
-    background-color: rgba(171, 70, 131, 0.455) ;
-    color: black;
-}
-tfoot td {
+  }
+  th {
+    background-color: #374151;
+  }
+  tfoot td {
     font-weight: bold;
-}
-.delete-btn {
-    padding: 5px, 10px; 
-    background-color: rgb(36, 4, 36);
+    background-color: #111827;
+  }
+  
+  /* Buttons */
+  .delete-btn {
+    background-color: #dc2626;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .delete-btn:hover {
+    background-color: #b91c1c;
+  }
+  
+  /* Calculator Section */
+  .calculator-section, .total-section {
+    padding: 20px;
+    margin: 40px auto;
+    background: #1f2937;
+    max-width: 600px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    text-align: center;
+    color: #f3f4f6;
+  }
+  .calculator-section input {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #374151;
+    background-color: #111827;
+    color: #f3f4f6;
+  }
+  .calculator-section button {
+    padding: 10px 20px;
+    background-color: #059669;
     color: white;
     border: none;
-    border-radius: 4px;   
-}
-.container{
-    width: 100%;
-    min-height: 100vh; 
-    background: rgb(2,0,36);
-    background: rgb(238,174,202);
-background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
-    padding: 10px;
-
-}
-#category-select{
-    height: 25px;
-    border-radius: 7px;
-    width: 100px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    background-color: darkolivegreen;
-    text-align: center;
-}
-#Amount-input{
-    height: 20px;
-    background-color: darkolivegreen;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    border-radius: 10px;
-    border: none;
-}
-#Date-input{
-    border-radius:7px ;
-    background-color: darkolivegreen;
-}
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .calculator-section button:hover {
+    background-color: #047857;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .input-section, .search-filter {
+      flex-direction: column;
+      align-items: center;
+    }
+    .nav-links {
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+  }
+  
+  

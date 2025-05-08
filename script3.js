@@ -1,91 +1,113 @@
-let expenses =[];
-let totalAmount = 0;
-
 const categorySelect = document.getElementById('category-select');
-const amountInput = document.getElementById('Amount-input');
-const dateInput = document.getElementById('Date-input');
+const amountInput = document.getElementById('amount-input');
+const dateInput = document.getElementById('date-input');
 const addBtn = document.getElementById('add-btn');
-const expensetableBody = document.getElementById('expense-table-body');
-const totalAmountCell = document.getElementById('Total-amount');
+const resetBtn = document.getElementById('reset-btn');
+const expenseTableBody = document.getElementById('expense-table-body');
+const totalAmountCell = document.getElementById('total-amount');
+const searchInput = document.getElementById('search-input');
+const filterCategory = document.getElementById('filter-category');
 
-addBtn.addEventListener('click', function(){
- const category = categorySelect.value;
- const amount= Number(amountInput.value);
- const date = dateInput.Value;
+let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
 
- if( category ==='') {
-    alert("Please select Category");
+function updateTotal() {
+  const total = expenses.reduce((sum, exp) => sum + exp.amount, 0);
+  totalAmountCell.textContent = total.toFixed(2);
+}
+
+function renderExpenses(data = expenses) {
+  expenseTableBody.innerHTML = '';
+
+  data.forEach((expense, index) => {
+    const row = document.createElement('tr');
+
+    row.innerHTML = `
+      <td>${expense.category}</td>
+      <td>₹ ${expense.amount}</td>
+      <td>${expense.date}</td>
+      <td><button class="delete-btn" data-index="${index}">Delete</button></td>
+    `;
+
+    expenseTableBody.appendChild(row);
+  });
+
+  updateTotal();
+  localStorage.setItem('expenses', JSON.stringify(expenses));
+}
+
+addBtn.addEventListener('click', () => {
+  const category = categorySelect.value;
+  const amount = parseFloat(amountInput.value);
+  const date = dateInput.value;
+
+  if (!category || isNaN(amount) || !date) {
+    alert('Please fill in all fields.');
     return;
+  }
 
- }
- if (isNaN (amount) || amount<=0) {
-    alert("Please enter a valid amount");
-    return;
- }
- if(date === '') {
-    alert("please select a date");
-    return;
- }
- expenses.push({category, amount, date});
+  expenses.push({ category, amount, date });
+  renderExpenses();
 
- totalAmount += amount;
- totalAmountCell.textContent=totalAmount;
-
- const newRow = expensetableBody.insertRow();
-
- const categoryCell = newRow.insertCell();
- const amountCell = newRow.insertCell();
- const dateCell = newRow.insertCell();
- const deleteCell = newRow.insertCell();
-
- const deleteBtn = document.createElement('Button');
-
- deleteBtn.textContent = "Delete";
- deleteBtn.classList.add('delete-btn');
- deleteBtn.addEventListener('click' , function(){
-    expenses.splice(expenses.indexOf(expense), 1);
-
-    totalAmount-=expense.amount;
-    totalAmountCell.textContent = totalAmount;
-
-    expensetableBody.removeChild(newRow);
-
- });
- const expense = expenses[expenses.length - 1];
- categoryCell.textContent=expense.category;
- amountCell.textContent-expense.amount;
- deleteCell.textContent= expense.date;
- deleteCell.appendChild(deleteBtn);
+  amountInput.value = '';
+  dateInput.value = '';
 });
-for(const expense of expenses) {
-    totalAmount += amount;
-    totalAmountCell.textContent=totalAmount;
-   
-    const newRow = expensetableBody.insertRow();
-   
-    const categoryCell = newRow.insertCell();
-    const amountCell = newRow.insertCell();
-    const dateCell = newRow.insertCell();
-    const deleteCell = newRow.insertCell();
-   
-    const deleteBtn = document.createElement('Button');
-   
-    deleteBtn.textContent = "Delete";
-    deleteBtn.classList.add('delete-btn');
-    deleteBtn.addEventListener('click' , function(){
-       expenses.splice(expenses.indexOf(expense), 1);
-   
-       totalAmount-=expense.amount;
-       totalAmountCell.textContent = totalAmount;
-   
-       expensetableBody.removeChild(newRow);
-   
-    })
-    const expense = expenses[expenses.length - 1];
-    categoryCell.textContent=expense.category;
-    amountCell.textContent-expense.amount;
-    deleteCell.textContent= expense.date;
-    deleteCell.appendChild(deleteBtn);
+
+expenseTableBody.addEventListener('click', (e) => {
+  if (e.target.classList.contains('delete-btn')) {
+    const index = e.target.getAttribute('data-index');
+    expenses.splice(index, 1);
+    renderExpenses();
+  }
+});
+
+resetBtn.addEventListener('click', () => {
+  if (confirm('Clear all expenses?')) {
+    expenses = [];
+    renderExpenses();
+  }
+});
+
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase();
+  const filtered = expenses.filter(
+    exp =>
+      exp.category.toLowerCase().includes(query) ||
+      exp.date.includes(query)
+  );
+  renderExpenses(filtered);
+});
+
+filterCategory.addEventListener('change', () => {
+  const selected = filterCategory.value;
+  if (selected === '') {
+    renderExpenses();
+  } else {
+    const filtered = expenses.filter(exp => exp.category === selected);
+    renderExpenses(filtered);
+  }
+});
+
+// Load on start
+renderExpenses();
+
+// Simple calculator function
+function calculateSum() {
+   const num1 = parseFloat(document.getElementById('calc-num1').value);
+   const num2 = parseFloat(document.getElementById('calc-num2').value);
+   const result = document.getElementById('calc-result');
+ 
+   if (isNaN(num1) || isNaN(num2)) {
+     result.textContent = "❗ Please enter valid numbers.";
+   } else {
+     result.textContent = `✅ Sum: ₹ ${num1 + num2}`;
    }
+ }
+ 
+ // Sync total tracker section
+ function updateTotalTracker() {
+   document.getElementById('total-tracker-display').textContent = `₹ ${totalAmountCell.textContent}`;
+ }
+ setInterval(updateTotalTracker, 1000);
+ 
 
-
+ 
